@@ -11,7 +11,10 @@ const aqi = {
 
 const searchbox = document.querySelector('.search-box');
 searchbox.addEventListener('keypress', setQuery);
-const iconElement = document.querySelector(".weather-icon");
+const iconElement = document.querySelector(".icon");
+const feelElem = document.querySelector('.feelLike')
+const tempElem = document.querySelector ('.forecast')
+// const iconAElem = document.querySelector ('.iconA')
 
 if('geolocation' in navigator){
   navigator.geolocation.getCurrentPosition(setPosition, showError);
@@ -26,6 +29,8 @@ if('geolocation' in navigator){
   let longitude = position.coords.longitude;
    getWeather(latitude, longitude);
    getAirQuality(latitude,longitude)
+   weatherForecast(latitude,longitude)
+
 }
 
 function getWeather (latitude, longitude) {
@@ -33,7 +38,26 @@ function getWeather (latitude, longitude) {
     .then(weather => {
       return weather.json();
     }).then(displayResults);
+  
   }
+  function weatherForecast(latitude, longitude) {
+    fetch(`${api.base}forecast?lat=${latitude}&lon=${longitude}&units=metric&APPID=${api.key}`)  
+    .then(function(resp) {
+        return resp.json() 
+    })
+    .then(function(data) {
+        console.log (data.list)
+    })
+  } 
+  
+  function getResults (query) {
+    fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
+      .then(weather => {
+        return weather.json();
+      }).then(displayResults);
+  }
+  
+  
 
   
 // SHOW ERROR WHEN THERE IS AN ISSUE WITH GEOLOCATION SERVICE
@@ -49,19 +73,46 @@ function setQuery(evt) {
   }
 }
 
-function getResults (query) {
-  fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
-    .then(weather => {
-      return weather.json();
-    }).then(displayResults);
+
+
+
+
+
+
+
+function forecastresult(data){
+  let temp = document.querySelector('.7day .tomorrow')
+  temp.innerText =`${data.list[1].main.temp}`;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 async function getAirQuality (latitude, longitude) {
 
   const response  = await fetch(`https://api.airvisual.com/v2/nearest_city?lat=${latitude}&lon=${longitude}&key=${aqi.key}`);
   const {data}= await response.json();
-  // console.log (data.current)
+  console.log (data)
  
   let city = data.city
   let country = data.country
@@ -75,21 +126,25 @@ async function getAirQuality (latitude, longitude) {
 }
 
 function displayResults (weather) {
-  let city = document.querySelector('.location .city');
+  let city = document.querySelector(' .city ');
   city.innerText = `${weather.name}, ${weather.sys.country}`;
   let now = new Date();
-  let date = document.querySelector('.location .date');
+  let date = document.querySelector('.date');
   date.innerText = dateBuilder(now);
-  let temp = document.querySelector('.current .temp');
+
+  
+
+  let temp = document.querySelector('.temp');
   iconElement.innerHTML = `<img src="icons/${weather.weather[0].icon}.png"/>`;
-  temp.innerHTML = `${Math.round(weather.main.temp)}<span>°c</span>`;
+  temp.innerHTML = `${Math.round(weather.main.temp)}°c `;
+  feelElem.innerHTML = `${Math.round(weather.main.feels_like)}°c`;
 
-
-  let weather_el = document.querySelector('.current .weather');
+  // console.log(weather.sys)
+  let weather_el = document.querySelector('.weather');
   weather_el.innerText = weather.weather[0].main;
 
   let hilow = document.querySelector('.hi-low');
-  hilow.innerText = `${Math.round(weather.main.temp_min)}°c / ${Math.round(weather.main.temp_max)}°c`;
+  hilow.innerText = `${Math.round(weather.main.temp_min)}°c | ${Math.round(weather.main.temp_max)}°c`;
 
 }
 
@@ -113,7 +168,7 @@ async function aqisearch (city) {
   let hu; 
   let ws;
 
-  const response  = await fetch(`https://api.airvisual.com/v2/city?city=${city}&state=${state}&country=${country}&key=${aqi.key}`);
+  const response  = await fetch(`http://api.airvisual.com/v2/city?city=${city}&state=${state}&country=${country}&key=${aqi.key}`);
   const {data}= await response.json();
 
 
@@ -131,16 +186,17 @@ async function aqisearch (city) {
 
 }
 
-function dispalyAirQuality(status,city, state,country, aqi, temperature, humidtity, wind){
+function dispalyAirQuality(status,city, state,country, aqi, temperature, humidtity, wind ){
 
   const aqiElem = document.querySelector('.aqi .aqiresult ');
   const humidityElem = document.querySelector('.aqi_humidity');
   const windElem = document.querySelector('.aqi_wind');
-  const textElem = document.querySelector('.text')    
+  const iconAElem = document.querySelector ('.iconA')
   const usaqiElem = document.querySelector('.usaqi')
   const notiTitleElem = document.querySelector('.notititle')
   const notiMessageElem = document.querySelector('.notimessage')
-  const tcElem = document.querySelector('.tc')
+  const feelmessage = document.querySelector('.feelmessage')
+  
   let title = "";
   let message = "";
   
@@ -150,30 +206,34 @@ function dispalyAirQuality(status,city, state,country, aqi, temperature, humidti
     aqiElem.innerText ="";
     humidityElem.innerText= "";
     windElem.innerText= "";
-    textElem.innerText= "";
+    iconAElem.innerText = ""
     usaqiElem.innerText="";
     notiTitleElem.innerText="";
     notiMessageElem.innerText= "";
-    tcElem.innerText = "";
+    
   } else {
-    textElem.innerText= 'PM 2.5 Quality Nearby Your Location'
+    
     aqiElem.innerText= aqi;
     
     if (aqi > 100) {
       title = "Danger"
-      message = "mask recommended";
-    } else if (aqi > 60) {
+      message = "Mask recommended";
+    } else if (aqi > 50) {
       title = "Unhealty";
-      message = "mask recommended";
+      message = "Mask recommended";
     }
+   
     notiTitleElem.innerText = title;
     notiMessageElem.innerText = message;
-    tcElem.innerText = "°C";
-    // usaqiElem.innerText= 'PM 2.5 Quality'
+    feelmessage.innerText = "FeelLike"
+    usaqiElem.innerText= "US AQI"
     humidityElem.innerText= `Humidity: ${humidtity}`;
     windElem.innerText= `Wind: ${wind} m/s`;  
   }
 } 
+
+
+
 
 
 

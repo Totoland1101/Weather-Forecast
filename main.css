@@ -3,11 +3,13 @@
     padding: 0;
     box-sizing: border-box;
   
-}body {
+}
+
+body {
     font-family: 'montserrat', sans-serif;
     background-image: url('images.jpg');
-    /* background-size: cover; */
-    background-position: center;
+    background-size: cover;
+
   }
 
   .app-wrap {
@@ -16,22 +18,23 @@
     min-height: 100vh;
     background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6));
   }
+
   header {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 50px 15px 15px;
+    padding: 20px 10px 10px;
   }
     
   header input{
-    width: 100%;
+    width: 60%;
     max-width: 280px;
     padding: 10px 15px;
     background-color: rgba(255, 255, 255, 0.3);
     border:none;
     outline:none;
     border-radius: 16px 0px 16px 0px;
-    border-bottom: 3px solid #a2d1df;
+    border-bottom: 3px solid #c1dce4;
 
     color: #313131;
     font-size: 15px;
@@ -53,137 +56,15 @@ header input:focus {
     text-align: center;
   }
   
-  .location .city {
-    color: #FFF;
-    font-size: 20px;
-    font-weight: 250;
-    margin-bottom: 5px;
-  }
-  .location  {
-    color: #FFF;
-    font-size: 19px;
-    font-weight: 100;
-    font-style: italic;
-  }
-
-  .current .temp {
-    color: #FFF;
-    font-size: 80px;
-    font-weight: 700;
-    font-style: italic;
-  }
-
-  .current .weather {
-    color: #FFF;
-    font-size: 32px;
-    font-weight: 700;
-    font-style: italic;
-    margin-bottom: 15px;
-    text-shadow: 0px 3px rgba(0, 0, 0, 0.4);
-  }
-
-  .info .text {
-      color:#FFF;
-      font-style: italic;
-      font-size: 20px;
-  }
-  
-  .info .aqi_city{
-      color: #FFF;
-      font-style: italic;
-  }
-
-  .info .state_country{
-      color: #FFF;
-      font-style: italic;
-  }
-
-  .info .aqi{
-    color: #FFF;
-    font-size: 30px;
-    font-weight: 500;
-  }
-
-.info .aqi_temperature{
-    color: #FFF;
-    font-style: italic;
-}
-
-.info .aqi_wind{
-    color: #FFF;
-    font-style: italic;
-    font-size: 20px;
-}
-
-.info .aqi_humidity{
-    color: #FFF;
-    font-style: italic;
-    font-size: 20px;
-}
-
-.aqiresult{
-  font-size: 70px;
-  font-style: italic;
-}
-
-.notititle {
-font-size: 25px;
-font-style: italic;
-}
-
-.notimessage{
-  font-size: 25px;
-  font-style: italic;
-}
-
-.usaqi{
-  font-size: 20px;
-  font-style: italic;
-  font-weight: 700;
-  font-style: italic;
-  
-}
-
-.tc{
-  font-size:  40px;
-  font-weight: 700;
-  font-style: italic;
-}
-
-*{
-    margin: 0;
-    padding: 0;
-    font-family: 'Poppins', sans-serif;
-  }
-
-  body{
-    display: grid;
-    height: 50%;
-    place-items: center;
-  }
-  .wrapper{
-    height: 35px;
-    width: 235px;
-    position: relative;
-    background: linear-gradient(135deg, #14ffe9, #ffeb3b, #ff00e0);
-    border-radius: 15px;
-    cursor: default;
-    animation: animate 1.5s linear infinite;
-  }
-  .wrapper .display,
-  
-  .wrapper span{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
   .wrapper .display{
-    z-index: 888;
-    height: 30px;
-    width: 225px;
-    background: rgb(95, 64, 64);
-    border-radius: 15px;
+    height: 35px;
+    width: 250px;
+    padding: 0px 0px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border:none;
+    outline:none;
+    border-radius: 15px 0px 15px 0px;
+    border-bottom: 3px solid #ffffff;
     text-align: center;
   }
   .display #time{
@@ -191,27 +72,145 @@ font-style: italic;
     color: #fff;
     font-size: 25px;
     font-weight: 300;
-    letter-spacing: 1px;
-    background: linear-gradient(135deg, #14ffe9, #ffeb3b, #ff00e0);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: animate 1.5s linear infinite;
+    font-style: italic; 
+    text-shadow: 0px 3px rgba(0, 0, 0, 0.4);
   }
-  @keyframes animate {
-    100%{
-      filter: hue-rotate(360deg);
-    }
+ 
+  
+  
+  .weatherA{
+    text-align: center;
+    column-count: 2;
   }
-  .wrapper span{
-    height: 100%;
-    width: 100%;
-    border-radius: 25px;
-    background: inherit;
-  }
-  .wrapper span:first-child{
-    filter: blur(7px);
-  }
-  .wrapper span:last-child{
-    filter: blur(20px);
+
+  .aqiElem{
+    column-count: 2;
   }
   
+ 
+  
+  .date {
+    color: #FFF;
+    text-align: center;
+    font-size: 25px;
+    font-weight: 500;
+    margin-bottom: 15px;
+    font-style: italic; 
+    text-shadow: 0px 3px rgba(0, 0, 0, 0.4);
+  }
+  .city {
+    color: #FFF;
+    font-size: 30px;
+    font-weight: 100px;
+    text-align: center;
+    font-style: italic; 
+    text-shadow: 0px 3px rgba(0, 0, 0, 0.4);
+    
+  }
+
+  .temp {
+    color: #FFF;
+    font-size: 50px;
+    font-weight: 500;
+    font-style: italic;
+    /* margin-bottom: 15px; */
+    text-shadow: 0px 3px rgba(0, 0, 0, 0.4);
+    
+  }
+
+  .weather {
+    color: #FFF;
+    font-size: 30px;
+    font-weight: 500;
+    font-style: italic;
+    margin-bottom: 15px;
+    text-shadow: 0px 3px rgba(0, 0, 0, 0.4);
+    text-align: center;
+  }
+
+  .feelLike {
+    color: #FFF;
+    font-size: 32px;
+    font-weight: 500;
+    font-style: italic;
+    /* margin-bottom: 15px; */
+    text-shadow: 0px 3px rgba(0, 0, 0, 0.4);
+    
+  }
+
+  .feelmessage{
+    color: #FFF;
+    font-size: 20px;
+    font-weight: 500;
+    font-style: italic; 
+    text-shadow: 0px 3px rgba(0, 0, 0, 0.4);
+  
+  }
+
+  .hi-low{
+     color: #FFF;
+    font-size: 20px;
+    font-weight: 500;
+    font-style: italic; 
+    text-shadow: 0px 3px rgba(0, 0, 0, 0.4);
+    
+  }
+
+  .notititle{
+    color: #FFF;
+    font-size: 30px;
+    font-weight: 500;
+    font-style: italic; 
+    text-shadow: 0px 3px rgba(0, 0, 0, 0.4);
+    text-align: center;
+  }
+  
+  .aqiresult{
+    color: #FFF;
+    font-size: 50px;
+    font-weight: 500;
+    font-style: italic; 
+    text-shadow: 0px 3px rgba(0, 0, 0, 0.4);
+    text-align: center;
+  }
+  
+  .usaqi{
+     color: #FFF;
+     font-size: 20px;
+     font-weight: 500;
+     font-style: italic;
+     text-shadow: 0px 3px rgba(0, 0, 0, 0.4);
+     text-align: center;
+  }
+
+  .aqi_humidity{
+    color: #FFF;
+    font-size: 20px;
+    font-weight: 500;
+    font-style: italic;
+    text-shadow: 0px 3px rgba(0, 0, 0, 0.4);
+    text-align: center;
+  }
+
+  .aqi_wind{
+    color: #FFF;
+    font-size: 20px;
+    font-weight: 500;
+    font-style: italic;
+    text-shadow: 0px 3px rgba(0, 0, 0, 0.4);
+    text-align: center;
+  }
+
+  .notimessage{
+    color: #FFF;
+    font-size: 20px;
+    font-weight: 500;
+    font-style: italic;
+    text-shadow: 0px 3px rgba(0, 0, 0, 0.4);
+    text-align: center;
+  }
+
+  .iconA{
+    text-align: center;
+  
+  }

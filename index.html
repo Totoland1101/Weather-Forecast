@@ -9,60 +9,79 @@
   <link rel="stylesheet" href="css/bootstrap.css" />
 
 </head>
-<br><div class="wrapper">
-  <div class="display">
-  <div id="time">
-</div> 
-<div class="container md">
+<main>
+  <br><div class="date"></div> 
+       
+  <div class="wrapper">
+    <div class="display">
+    <div id="time">
+  </div> 
+
   <div class="app_wrap">
-    <header>
-      <input type="text" autocomplete="off" class="search-box" placeholder="Search for a city..." />
-     </header>
-      <main>
-        <div class="Weather Forecast">
-          <div class="location">
-          <div class="date">--------</div>  
-          <div class="city">--------</div>
-          <div class="current">
-          <div class="location">
-          <br><div class="temp"><span></span></div> <div class="tc"></div>
-          <br><div class="weather"></div>
-          <div class="weather-icon">
-            <img src="icons/unknown.png" alt="">
-          </div>
-          <div class="hi-low">- / -</div>  
-          <div class="low_hi">Forecast Of Day</div>
-        </div> 
-      </main>
-    </header>
+     <header>
+       <input type="text" autocomplete="off" class="search-box" placeholder="Search for a city..." />
+      </header>
+  </div>
+</main>
+  
+<div class="container-sm">
+    
+  <br><div class="city"></div>
+
+  <div class="row">
+   
+    <div class="weatherA">
+
+     <br><div class="icon">
+        <img src="icons/unknown.png" alt="">
+     </div>
+    
+
+      <br><div class="weather"></div>
+      
+      <div class="temp"></div>
+       
+      <div class="hi-low"></div>
+        
+        <br><div class="feelLike"></div>
+        <div class="feelmessage"></div>
+
+      </div> 
+    </div>
+
+  <div class="row">
+      
+    <div class="aqiElem">
+      
+      <div class="iconA">
+         <img src="wind.png" width="128" height="128"  alt="">
+      </div>
+        
+        <div class="aqi">
+
+          <br><div class="notititle">  </div>
+          <div class="aqiresult"> </div>
+          <div class="usaqi"></div>
+          <div class=" aqi_humidity"></div>
+          <div class="aqi_wind"></div>
+          <br><div class="notimessage">  </div>
+          
+        </div>
+      </div>
+    </div> 
   </div>
 </div>
 
-</html> 
+<!-- <div class="row">
+  <div class="7day">Tomorrow</div>
+  
+  <div class="tomorrow">-----</div>
 
+</div> -->
 
-
-<div class="info">   
-<div class="text">PM 2.5 Quality Nearby Your Location</div>
-   
-  <div class="aqi_location">
-      <!-- <h2 class="aqi_city">-------- </h2> -->
-      <!-- <p class="state_country">------</p> --> 
-      
-      <div class="aqi">
-      <div class="aqiresult">-----</div>
-      <div class="notititle">  </div>
-      <div class="notimessage">  </div>
-      <div class="usaqi"></div>
-      </div>
-    <!-- <br><div class="aqi_temperature">-----</div> -->
-    <br><div class=" aqi_humidity">------</div>
-    <div class="aqi_wind">------</div>
-  </div>
-
-</div>  
-
+</html>
 <script src="main.js"></script>
 <script src="clock.js"></script>
 <script src="js/bootstrap.min.js"></script>
+
 
