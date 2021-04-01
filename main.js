@@ -7,14 +7,12 @@ const aqi = {
   base: "https://api.airvisual.com/v2/"
 }
 
-// const key = `c3d4c8fd-a05c-475a-8ae4-04bde3951bfa`
 
 const searchbox = document.querySelector('.search-box');
 searchbox.addEventListener('keypress', setQuery);
 const iconElement = document.querySelector(".icon");
 const feelElem = document.querySelector('.feelLike')
-const tempElem = document.querySelector ('.forecast')
-// const iconAElem = document.querySelector ('.iconA')
+
 
 if('geolocation' in navigator){
   navigator.geolocation.getCurrentPosition(setPosition, showError);
@@ -27,7 +25,8 @@ if('geolocation' in navigator){
  function setPosition(position){
   let latitude = position.coords.latitude;
   let longitude = position.coords.longitude;
-   getWeather(latitude, longitude);
+   
+  getWeather(latitude, longitude);
    getAirQuality(latitude,longitude)
    weatherForecast(latitude,longitude)
 
@@ -41,13 +40,12 @@ function getWeather (latitude, longitude) {
   
   }
   function weatherForecast(latitude, longitude) {
-    fetch(`${api.base}forecast?lat=${latitude}&lon=${longitude}&units=metric&APPID=${api.key}`)  
-    .then(function(resp) {
-        return resp.json() 
-    })
-    .then(function(data) {
-        console.log (data.list)
-    })
+    fetch(`${api.base}onecall?lat=${latitude}&lon=${longitude}&units=metric&APPID=${api.key}`)  
+   
+    .then(forecast => {
+        return forecast.json() 
+    }).then(forecastresult);
+    
   } 
   
   function getResults (query) {
@@ -56,9 +54,6 @@ function getWeather (latitude, longitude) {
         return weather.json();
       }).then(displayResults);
   }
-  
-  
-
   
 // SHOW ERROR WHEN THERE IS AN ISSUE WITH GEOLOCATION SERVICE
 function showError(error){
@@ -72,41 +67,6 @@ function setQuery(evt) {
     aqisearch(searchbox.value);
   }
 }
-
-
-
-
-
-
-
-
-function forecastresult(data){
-  let temp = document.querySelector('.7day .tomorrow')
-  temp.innerText =`${data.list[1].main.temp}`;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 async function getAirQuality (latitude, longitude) {
 
@@ -123,41 +83,6 @@ async function getAirQuality (latitude, longitude) {
   let ws = data.current.weather.ws
 
   dispalyAirQuality(response.status,city, state, country,aqius,temperature ,hu,ws)
-}
-
-function displayResults (weather) {
-  let city = document.querySelector(' .city ');
-  city.innerText = `${weather.name}, ${weather.sys.country}`;
-  let now = new Date();
-  let date = document.querySelector('.date');
-  date.innerText = dateBuilder(now);
-
-  
-
-  let temp = document.querySelector('.temp');
-  iconElement.innerHTML = `<img src="icons/${weather.weather[0].icon}.png"/>`;
-  temp.innerHTML = `${Math.round(weather.main.temp)}°c `;
-  feelElem.innerHTML = `${Math.round(weather.main.feels_like)}°c`;
-
-  // console.log(weather.sys)
-  let weather_el = document.querySelector('.weather');
-  weather_el.innerText = weather.weather[0].main;
-
-  let hilow = document.querySelector('.hi-low');
-  hilow.innerText = `${Math.round(weather.main.temp_min)}°c | ${Math.round(weather.main.temp_max)}°c`;
-
-}
-
-function dateBuilder (d) {
-  let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-  let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-
-  let day = days[d.getDay()];
-  let date = d.getDate();
-  let month = months[d.getMonth()];
-  let year = d.getFullYear();
-
-  return `${day} ${date} ${month} ${year}`; 
 }
 
 async function aqisearch (city) {
@@ -217,10 +142,10 @@ function dispalyAirQuality(status,city, state,country, aqi, temperature, humidti
     
     if (aqi > 100) {
       title = "Danger"
-      message = "Mask recommended";
+      message = "Mask Recommended";
     } else if (aqi > 50) {
-      title = "Unhealty";
-      message = "Mask recommended";
+      title = "Unhealthy";
+      message = "Mask Recommended";
     }
    
     notiTitleElem.innerText = title;
@@ -232,9 +157,83 @@ function dispalyAirQuality(status,city, state,country, aqi, temperature, humidti
   }
 } 
 
+function displayResults (weather) {
+  let city = document.querySelector(' .city ');
+  city.innerText = `${weather.name}, ${weather.sys.country}`;
+  let now = new Date();
+  let date = document.querySelector('.date');
+  date.innerText = dateBuilder(now);
+  let temp = document.querySelector('.temp');
+  iconElement.innerHTML = `<img src="icons/${weather.weather[0].icon}.png"/>`;
+  temp.innerHTML = `${Math.round(weather.main.temp)}°c `;
+  feelElem.innerHTML = `${Math.round(weather.main.feels_like)}°c`;
+
+  // console.log(weather.sys)
+  let weather_el = document.querySelector('.weather');
+  weather_el.innerText = weather.weather[0].main;
+
+  let hilow = document.querySelector('.hi-low');
+  hilow.innerText = `${Math.round(weather.main.temp_min)}°c | ${Math.round(weather.main.temp_max)}°c`;
+
+}
 
 
+function forecastresult(forecast){
+  
+  // console.log(forecast.daily)
 
+  let tomorrow = document.querySelector ('.tomorrow')
+  tomorrow.innerText =`${Math.round(forecast.daily[1].temp.max)}°c | ${Math.round(forecast.daily[1].temp.min)}°c`;
 
+  let iconA = document.querySelector('.ia')
+  iconA.innerHTML = `<img src="icons/${forecast.daily[1].weather[0].icon}.png"width="30" height="30"/>`;
+  
+  let two = document.querySelector ('.two')
+  two.innerText =`${Math.round(forecast.daily[2].temp.max)}°c | ${Math.round(forecast.daily[2].temp.min)}°c`;
 
+  let iconB = document.querySelector('.ib')
+  iconB.innerHTML = `<img src="icons/${forecast.daily[2].weather[0].icon}.png"width="30" height="30"/>`;
 
+  let three = document.querySelector ('.three')
+  three.innerText =`${Math.round(forecast.daily[3].temp.max)}°c | ${Math.round(forecast.daily[3].temp.min)}°c`;
+
+  let iconC = document.querySelector('.ic')
+  iconC.innerHTML = `<img src="icons/${forecast.daily[3].weather[0].icon}.png"width="30" height="30"/>`;
+
+  let four = document.querySelector ('.four')
+  four.innerText =`${Math.round(forecast.daily[4].temp.max)}°c | ${Math.round(forecast.daily[4].temp.min)}°c`;
+
+  let iconD = document.querySelector('.id')
+  iconD.innerHTML = `<img src="icons/${forecast.daily[4].weather[0].icon}.png"width="30" height="30"/>`;
+  
+  let five = document.querySelector ('.five')
+  five.innerText =`${Math.round(forecast.daily[5].temp.max)}°c | ${Math.round(forecast.daily[5].temp.min)}°c`;
+
+  let iconE = document.querySelector('.ie')
+  iconE.innerHTML = `<img src="icons/${forecast.daily[5].weather[0].icon}.png"width="30" height="30"/>`;
+
+  let six = document.querySelector ('.six')
+  six.innerText =`${Math.round(forecast.daily[6].temp.max)}°c | ${Math.round(forecast.daily[6].temp.min)}°c`;
+
+  let iconF = document.querySelector('.if')
+  iconF.innerHTML = `<img src="icons/${forecast.daily[6].weather[0].icon}.png"width="30" height="30"/>`;
+
+  let seven = document.querySelector ('.seven')
+  seven.innerText =`${Math.round(forecast.daily[7].temp.max)}°c | ${Math.round(forecast.daily[7].temp.min)}°c`;
+  
+  let iconG = document.querySelector('.ig')
+  iconG.innerHTML = `<img src="icons/${forecast.daily[7].weather[0].icon}.png"width="30" height="30"/>`;
+
+}
+
+function dateBuilder (d) {
+  let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+  let day = days[d.getDay()];
+  let date = d.getDate();
+  let month = months[d.getMonth()];
+  let year = d.getFullYear();
+
+  return `${day} ${date} ${month} ${year}`; 
+}

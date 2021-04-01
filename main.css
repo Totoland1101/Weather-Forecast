@@ -7,7 +7,7 @@
 
 body {
     font-family: 'montserrat', sans-serif;
-    background-image: url('images.jpg');
+    background-image: url('images.png');
     background-size: cover;
 
   }
@@ -87,8 +87,6 @@ header input:focus {
     column-count: 2;
   }
   
- 
-  
   .date {
     color: #FFF;
     text-align: center;
@@ -120,7 +118,7 @@ header input:focus {
 
   .weather {
     color: #FFF;
-    font-size: 30px;
+    font-size: 25px;
     font-weight: 500;
     font-style: italic;
     margin-bottom: 15px;
@@ -158,7 +156,7 @@ header input:focus {
 
   .notititle{
     color: #FFF;
-    font-size: 30px;
+    font-size: 25px;
     font-weight: 500;
     font-style: italic; 
     text-shadow: 0px 3px rgba(0, 0, 0, 0.4);
@@ -203,7 +201,7 @@ header input:focus {
 
   .notimessage{
     color: #FFF;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 500;
     font-style: italic;
     text-shadow: 0px 3px rgba(0, 0, 0, 0.4);
@@ -212,5 +210,24 @@ header input:focus {
 
   .iconA{
     text-align: center;
+  }
+
+  .sevenday{
+    color: #FFF;
+    font-size: 16px;
+    font-weight: 500;
+    font-style: italic;
+    text-shadow: 0px 2px rgba(0, 0, 0, 0.4);
+  }
+
+  .tempseven{
+    color: #FFF;
+    font-size: 16px;
+    font-weight: 500;
+    font-style: italic;
+    text-shadow: 0px 2px rgba(0, 0, 0, 0.4);
+  }
   
+  .icontemp{
+    text-align: center;
   }
