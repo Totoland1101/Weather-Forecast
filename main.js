@@ -93,7 +93,7 @@ async function aqisearch (city) {
   let hu; 
   let ws;
 
-  const response  = await fetch(`http://api.airvisual.com/v2/city?city=${city}&state=${state}&country=${country}&key=${aqi.key}`);
+  const response  = await fetch(`https://api.airvisual.com/v2/city?city=${city}&state=${state}&country=${country}&key=${aqi.key}`);
   const {data}= await response.json();
 
 
