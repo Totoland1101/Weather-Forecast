@@ -27,8 +27,8 @@ if('geolocation' in navigator){
   let longitude = position.coords.longitude;
    
   getWeather(latitude, longitude);
-   getAirQuality(latitude,longitude)
-   weatherForecast(latitude,longitude)
+  getAirQuality(latitude,longitude)
+  weatherForecast(latitude,longitude)
 
 }
 
@@ -121,6 +121,7 @@ function dispalyAirQuality(status,city, state,country, aqi, temperature, humidti
   const notiTitleElem = document.querySelector('.notititle')
   const notiMessageElem = document.querySelector('.notimessage')
   const feelmessage = document.querySelector('.feelmessage')
+  const sevendayElem = document.querySelector('.table')
   
   let title = "";
   let message = "";
@@ -131,10 +132,11 @@ function dispalyAirQuality(status,city, state,country, aqi, temperature, humidti
     aqiElem.innerText ="";
     humidityElem.innerText= "";
     windElem.innerText= "";
-    iconAElem.innerText = ""
+    iconAElem.style.visibility = 'hidden';
     usaqiElem.innerText="";
     notiTitleElem.innerText="";
     notiMessageElem.innerText= "";
+    sevendayElem.style.visibility = 'hidden';
     
   } else {
     
@@ -143,11 +145,18 @@ function dispalyAirQuality(status,city, state,country, aqi, temperature, humidti
     if (aqi > 100) {
       title = "Danger"
       message = "Mask Recommended";
-    } else if (aqi > 50) {
+    } else if (aqi > 55) {
       title = "Unhealthy";
       message = "Mask Recommended";
     }
-   
+
+    if (aqi < 54) {
+      title = "Good"
+      message = "";
+    }
+
+    sevendayElem.style.visibility = 'visible';
+    iconAElem.style.visibility = 'visible';
     notiTitleElem.innerText = title;
     notiMessageElem.innerText = message;
     feelmessage.innerText = "FeelLike"
@@ -168,7 +177,7 @@ function displayResults (weather) {
   temp.innerHTML = `${Math.round(weather.main.temp)}°c `;
   feelElem.innerHTML = `${Math.round(weather.main.feels_like)}°c`;
 
-  // console.log(weather.sys)
+  console.log(weather)
   let weather_el = document.querySelector('.weather');
   weather_el.innerText = weather.weather[0].main;
 
