@@ -189,7 +189,12 @@ function displayResults (weather) {
 
 function forecastresult(forecast){
   
-  // console.log(forecast.daily)
+  console.log(forecast)
+
+  
+  let hilow = document.querySelector('.hi-low');
+  hilow.innerText = `${Math.round(forecast.daily[0].temp.max)}°c | ${Math.round(forecast.daily[0].temp.min)}°c`;
+
 
   let tomorrow = document.querySelector ('.tomorrow')
   tomorrow.innerText =`${Math.round(forecast.daily[1].temp.max)}°c | ${Math.round(forecast.daily[1].temp.min)}°c`;
