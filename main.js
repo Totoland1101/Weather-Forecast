@@ -145,7 +145,7 @@ function dispalyAirQuality(status,city, state,country, aqi, temperature, humidti
     if (aqi > 100) {
       title = "Danger"
       message = "Mask Recommended";
-    } else if (aqi > 55) {
+    } else if (aqi > 54) {
       title = "Unhealthy";
       message = "Mask Recommended";
     }
