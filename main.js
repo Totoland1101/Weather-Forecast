@@ -1,9 +1,9 @@
 const api = {
- key: "e56d16ddb7d0f6546328fbf42de90a6c",
+ key: "b350945ae19cf130dbad7046e5df35ce",
  base: "https://api.openweathermap.org/data/2.5/"
 }
 const aqi = {
-  key: "f19abe98-99b6-4874-9002-a41d2754845e",
+  key: "cd66f8ea-d16f-4c17-825f-6920740d23de",
   base: "https://api.airvisual.com/v2/"
 }
 
